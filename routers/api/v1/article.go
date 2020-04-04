@@ -98,10 +98,10 @@ func AddArticle(c *gin.Context) {
 	valid.Range(state, 0, 1, "state").Message("状态只允许0或1")
 
 	code := e.INVALID_PARAMS
-	if valid.HasErrors() {
+	if !valid.HasErrors() {
 		if models.ExistTagByID(tagId) {
 			data := make(map[string]interface{})
-			data["tagId"] = tagId
+			data["tag_id"] = tagId
 			data["title"] = title
 			data["desc"] = desc
 			data["content"] = content
@@ -150,7 +150,7 @@ func EditArticle(c *gin.Context) {
 	valid.MaxSize(modifiedBy, 100, "modified_by").Message("修改人最长为100字符")
 
 	code := e.INVALID_PARAMS
-	if valid.HasErrors() {
+	if !valid.HasErrors() {
 		if models.ExistArticleByID(id) {
 			if models.ExistTagByID(tagId) {
 				data := make(map[string]interface{})

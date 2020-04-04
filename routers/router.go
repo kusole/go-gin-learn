@@ -22,11 +22,9 @@ func InitRouter() *gin.Engine {
 	apiv1 := r.Group("api/v1")
 	{
 		// 获取标签列表
-		// GET http://127.0.0.1:8000/api/v1/tags?name=2&state=1&page=1
 		apiv1.GET("/tags", v1.GetTags)
 
 		// 新建标签
-		// POST http://127.0.0.1:8000/api/v1/tags?name=2&state=1&created_by=test
 		apiv1.POST("/tags", v1.AddTag)
 
 		// 指定更新标签
@@ -53,3 +51,20 @@ func InitRouter() *gin.Engine {
 
 	return r
 }
+
+// tag
+/*
+	GET: http://127.0.0.1:8000/api/v1/tags?name=2&state=1&page=1
+	POST: http://127.0.0.1:8000/api/v1/tags?name=2&state=1&created_by=test
+	PUT: http://127.0.0.1:8000/api/v1/tags/1?name=linux&modified_by=liutao
+	DELETE: http://127.0.0.1:8000/api/v1/tags/1
+*/
+
+// article
+/*
+	POST：http://127.0.0.1:8000/api/v1/articles?tag_id=1&title=test1&desc=test-desc&content=test-content&created_by=test-created&state=1
+	GET：http://127.0.0.1:8000/api/v1/articles
+	GET：http://127.0.0.1:8000/api/v1/articles/1
+	PUT：http://127.0.0.1:8000/api/v1/articles/1?tag_id=1&title=test-edit1&desc=test-desc-edit&content=test-content-edit&modified_by=test-created-edit&state=0
+	DELETE：http://127.0.0.1:8000/api/v1/articles/1
+*/

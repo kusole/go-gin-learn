@@ -3,7 +3,9 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 	setting "github.com/kusole/go-gin-learn/pkg"
+	"github.com/kusole/go-gin-learn/routers/api"
 	v1 "github.com/kusole/go-gin-learn/routers/api/v1"
+	jwt "github.com/kusole/go-gin-learn/middleware"
 )
 
 func InitRouter() *gin.Engine {
@@ -19,7 +21,10 @@ func InitRouter() *gin.Engine {
 		})
 	})
 
+	r.GET("/auth", api.GetAuth)
+
 	apiv1 := r.Group("api/v1")
+	apiv1.Use(jwt.JWT())
 	{
 		// 获取标签列表
 		apiv1.GET("/tags", v1.GetTags)
